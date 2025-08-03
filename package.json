@@ -1,0 +1,21 @@
+{
+  "name": "blogs",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.1.0",
+    "prisma": "^6.13.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.13.0",
+    "express": "^5.1.0",
+    "marked": "^16.1.1",
+    "toml": "^3.0.0"
+  }
+}
