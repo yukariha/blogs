@@ -1,16 +1,7 @@
 import { marked } from "marked";
 import { readdir } from "node:fs/promises";
 import path from "path";
-
-type PostMetadata = {
-  title: string;
-  description: string;
-  createdAt: string;
-  slug: string;
-  image: string;
-  author?: string;
-  tags?: string[];
-};
+import { type PostMetadata } from "@shared/types";
 
 class BlogPost {
   constructor(

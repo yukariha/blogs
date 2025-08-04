@@ -1,13 +1,5 @@
 import { useEffect, useState } from "react";
-
-type PostMetadata = {
-  title: string;
-  description: string;
-  createdAt: string;
-  slug: string;
-  author?: string;
-  tags?: string[];
-};
+import { type PostMetadata } from "@shared/types";
 
 function App() {
   const url = "http://localhost:3000";
@@ -25,20 +17,24 @@ function App() {
 
   return (
     <div className="min-h-screen bg-neutral-200 p-8">
-      <h1>Hello, world!</h1>
-
-      <div className="columns-3 gap-4">
+      <div className="flex flex-col gap-4">
         {posts.length > 0 ? (
           posts.map((post, index) => (
             <div
               key={post.slug ?? index}
-              className="bg-white flex flex-col p-8"
+              className="flex flex-col overflow-hidden rounded-xl bg-white"
             >
-              <span>Post #{index + 1}</span>
-              <p>{post.title}</p>
-              <p>{post.createdAt}</p>
-              <p>{post.author}</p>
-              <p>{post.createdAt}</p>
+              <img src={post.image} className="" alt="" />
+              <div className="p-8">
+                <p className="text-xl font-semibold">{post.title}</p>
+                <p className="text-md font-medium text-neutral-500">
+                  {post.createdAt}
+                </p>
+                <p>{post.author}</p>
+                <p>
+                  {post.tags?.length ? "Tags: " + post.tags?.join(", ") : " "}
+                </p>
+              </div>
             </div>
           ))
         ) : (
