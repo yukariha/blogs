@@ -6,8 +6,7 @@ import IndexPage from "./components/IndexPage";
 import ReactLogo from "./assets/react.svg";
 
 function App() {
-  const url = "http://10.28.250.166:3000";
-  // const url = "http://localhost:3000":
+  const url = "http://localhost:3000";
   const [posts, setPosts] = useState<PostMetadata[]>([]);
 
   useEffect(() => {
@@ -36,7 +35,7 @@ function App() {
             <Route path="/">
               <IndexPage posts={posts} />
             </Route>
-            <Route path="/posts/:slug" component={PostPage} />
+            <Route path="/post/:slug" component={PostPage} />
             <Route>404 - Not Found</Route>
           </Switch>
         </main>

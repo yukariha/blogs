@@ -54,7 +54,7 @@ function PostCard({ post }: PostCardProps) {
             </p>
           </div>
           <Link
-            href={`/posts/${post.slug}`}
+            href={`/post/${post.slug}`}
             className="block break-inside-avoid text-blue-500 transition hover:text-blue-400"
           >
             Read Post
