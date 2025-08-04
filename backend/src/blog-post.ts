@@ -22,6 +22,16 @@ class BlogPost {
 
     if (tomlString !== undefined) {
       const metadata = Bun.TOML.parse(tomlString) as PostMetadata;
+
+      if (metadata.createdAt && typeof metadata.createdAt === "string") {
+        metadata.createdAt = new Date(metadata.createdAt);
+        if (isNaN(metadata.createdAt.getTime())) {
+          throw new Error("Invalid date format in createdAt");
+        }
+      } else {
+        throw new Error("createdAt is missing or not a string");
+      }
+
       return new BlogPost(metadata, content);
     } else {
       throw new Error("Couldn't parse metadata");

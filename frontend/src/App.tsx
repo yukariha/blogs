@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { type PostMetadata } from "@shared/types";
+import type { PostMetadata } from "@shared/types";
+import PostCard from "./components/PostCard";
 
 function App() {
-  const url = "http://localhost:3000";
+  // const url = "http://localhost:3000";
+  const url = "http://10.28.250.166:3000";
   const [posts, setPosts] = useState<PostMetadata[]>([]);
 
   useEffect(() => {
@@ -12,33 +14,15 @@ function App() {
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
-    console.log(posts);
   }, []);
 
   return (
-    <div className="min-h-screen bg-neutral-200 p-8">
-      <div className="flex flex-col gap-4">
+    <div className="min-h-screen bg-gray-200 p-8 dark:bg-zinc-900">
+      <div className="md:columns-2 lg:columns-3 xl:columns-4">
         {posts.length > 0 ? (
-          posts.map((post, index) => (
-            <div
-              key={post.slug ?? index}
-              className="flex flex-col overflow-hidden rounded-xl bg-white"
-            >
-              <img src={post.image} className="" alt="" />
-              <div className="p-8">
-                <p className="text-xl font-semibold">{post.title}</p>
-                <p className="text-md font-medium text-neutral-500">
-                  {post.createdAt}
-                </p>
-                <p>{post.author}</p>
-                <p>
-                  {post.tags?.length ? "Tags: " + post.tags?.join(", ") : " "}
-                </p>
-              </div>
-            </div>
-          ))
+          posts.map((post) => <PostCard post={post} />)
         ) : (
-          <p>Loading posts...</p>
+          <p className="text-gray-700 dark:text-zinc-400">Loading posts...</p>
         )}
       </div>
     </div>
