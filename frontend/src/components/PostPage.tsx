@@ -12,7 +12,7 @@ function PostPage() {
   }, []);
 
   return (
-    <article className="mx-auto max-w-3xl dark:text-zinc-100">
+    <article className="prose dark:prose-invert prose-img:rounded-xl mx-auto max-w-3xl dark:text-zinc-200">
       <div dangerouslySetInnerHTML={{ __html: postHTML }} />
     </article>
   );
