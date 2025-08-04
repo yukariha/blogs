@@ -1,11 +1,19 @@
+import { useEffect, useState } from "react";
+
 function PostPage() {
-  // useEffect(() => {
-  //   const url = "http://10.28.250.166:3000";
-  //   fetch(`${url}/posts`)
-  // })
+  const [postHTML, setPostHTML] = useState("");
+
+  useEffect(() => {
+    const url = "http://10.28.250.166:3000";
+    fetch(`${url}/posts/1`)
+      .then((response) => response.text())
+      .then((data) => setPostHTML(data))
+      .catch((err) => console.error(err.message));
+  }, []);
+
   return (
-    <article className="prose dark:prose-invert mx-auto max-w-3xl">
-      <h1>Post title</h1>
+    <article className="mx-auto max-w-3xl dark:text-zinc-100">
+      <div dangerouslySetInnerHTML={{ __html: postHTML }} />
     </article>
   );
 }

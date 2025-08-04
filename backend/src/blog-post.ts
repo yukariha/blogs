@@ -1,6 +1,7 @@
 import { marked } from "marked";
 import { readdir } from "node:fs/promises";
 import path from "path";
+import sanitizeHtml from "sanitize-html";
 import { type PostMetadata } from "@shared/types";
 
 class BlogPost {
@@ -39,6 +40,47 @@ class BlogPost {
   }
 
   async toHTML(): Promise<string> {
+    const rawHTML = await marked.parse(this.content);
+    const cleanHTML = sanitizeHtml(rawHTML, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "table",
+        "thead",
+        "tbody",
+        "tr",
+        "th",
+        "td",
+        "img",
+        "pre",
+        "code",
+        "blockquote",
+        "hr",
+        "del",
+        "sup",
+        "sub",
+        "kbd",
+        "samp",
+        "var",
+      ]),
+      allowedAttributes: {
+        ...sanitizeHtml.defaults.allowedAttributes,
+        img: ["src", "alt", "title", "loading"],
+        a: ["href", "name", "target", "rel"],
+        code: ["class"],
+        th: ["align"],
+        td: ["align"],
+      },
+      allowedSchemesByTag: {
+        a: ["http", "https", "mailto", "tel"],
+        img: ["http", "https", "data"],
+      },
+    });
+
     return `
   <!DOCTYPE html>
   <html lang="en">
@@ -50,7 +92,7 @@ class BlogPost {
   </head>
   <body>
     <div class="markdown-body">
-      ${await marked.parse(this.content)}
+      ${cleanHTML}
     </div>
   </body>
   </html>

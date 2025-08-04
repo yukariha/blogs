@@ -35,27 +35,29 @@ function PostCard({ post }: PostCardProps) {
         <p className="text-gray-500 dark:text-zinc-500">
           {post.tags?.length ? "Tags: " + post.tags?.join(", ") : " "}
         </p>
-        <div className="card-footer mt-8 flex items-center gap-1.5">
-          <img
-            src={post.authorPicture ?? PlaceholderImage}
-            alt="Author's Picture"
-            className="h-8 w-8 rounded-full"
-          />
-          <p
-            className={
-              post.author
-                ? "font-medium text-gray-800 dark:text-zinc-200"
-                : "inline-flex items-center gap-1 rounded-md bg-gray-200 px-2 py-0.5 text-sm font-medium text-gray-600 dark:bg-zinc-700 dark:text-zinc-400"
-            }
-            title={post.author ? undefined : "Anonymous user"}
-          >
-            {post.author ?? "Anon"}
-          </p>
+        <div className="card-footer mt-8 flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
+            <img
+              src={post.authorPicture ?? PlaceholderImage}
+              alt="Author's Picture"
+              className="h-8 w-8 rounded-full"
+            />
+            <p
+              className={
+                post.author
+                  ? "font-medium text-gray-800 dark:text-zinc-200"
+                  : "inline-flex items-center gap-1 rounded-md bg-gray-200 px-2 py-0.5 text-sm font-medium text-gray-600 dark:bg-zinc-700 dark:text-zinc-400"
+              }
+              title={post.author ? undefined : "Anonymous user"}
+            >
+              {post.author ?? "Anon"}
+            </p>
+          </div>
           <Link
             href={`/posts/${post.slug}`}
-            className="mb-6 block break-inside-avoid"
+            className="block break-inside-avoid text-blue-500 hover:text-blue-400"
           >
-            hai
+            Read Post
           </Link>
         </div>
       </div>
