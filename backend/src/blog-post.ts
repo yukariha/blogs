@@ -4,8 +4,11 @@ import path from "path";
 
 type PostMetadata = {
   title: string;
+  description: string;
   createdAt: string;
   slug: string;
+  author?: string;
+  tags?: string[];
 };
 
 class BlogPost {
