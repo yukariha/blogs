@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import type { PostMetadata } from "@shared/types";
-import PostCard from "./components/PostCard";
+import { Route, Switch } from "wouter";
+import PostPage from "./components/PostPage";
+import IndexPage from "./components/IndexPage";
 
 function App() {
-  // const url = "http://localhost:3000";
   const url = "http://10.28.250.166:3000";
   const [posts, setPosts] = useState<PostMetadata[]>([]);
 
@@ -18,13 +19,19 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-200 p-8 dark:bg-zinc-900">
-      <div className="md:columns-2 lg:columns-3 xl:columns-4">
-        {posts.length > 0 ? (
-          posts.map((post) => <PostCard post={post} />)
-        ) : (
-          <p className="text-gray-700 dark:text-zinc-400">Loading posts...</p>
-        )}
-      </div>
+      <header className="mb-8">
+        <h1 className="text-center font-serif text-3xl font-semibold text-gray-900 dark:text-zinc-200">
+          Blogs
+        </h1>
+      </header>
+
+      <Switch>
+        <Route path="/">
+          <IndexPage posts={posts} />
+        </Route>
+        <Route path="/posts/:slug" component={PostPage} />
+        <Route>404 - Not Found</Route>
+      </Switch>
     </div>
   );
 }

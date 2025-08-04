@@ -1,5 +1,6 @@
 import type { PostMetadata } from "@shared/types";
 import PlaceholderImage from "../assets/default.svg";
+import { Link } from "wouter";
 
 type PostCardProps = {
   post: PostMetadata;
@@ -50,6 +51,12 @@ function PostCard({ post }: PostCardProps) {
           >
             {post.author ?? "Anon"}
           </p>
+          <Link
+            href={`/posts/${post.slug}`}
+            className="mb-6 block break-inside-avoid"
+          >
+            hai
+          </Link>
         </div>
       </div>
     </div>
